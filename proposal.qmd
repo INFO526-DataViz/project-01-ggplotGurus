@@ -8,7 +8,9 @@ editor: visual
 ```{r}
 #| label: load-pkgs
 #| message: false
-library(tidyverse)
+if (!require("pacman"))
+  install.packages("pacman")
+pacman::p_load(tidyverse, tidytuesdayR)
 ```
 
 ## Dataset
@@ -16,6 +18,12 @@ library(tidyverse)
 ```{r}
 #| label: load-dataset
 #| message: false
+tuesdata <- tidytuesdayR::tt_load('2022-12-20')
+tuesdata <- tidytuesdayR::tt_load(2022, week = 51)
+
+weather_forecasts <- tuesdata$weather_forecasts
+cities <- tuesdata$cities
+outlook_meanings <- tuesdata$outlook_meanings
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
