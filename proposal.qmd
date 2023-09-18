@@ -18,17 +18,21 @@ pacman::p_load(tidyverse, tidytuesdayR)
 ```{r}
 #| label: load-dataset
 #| message: false
-tuesdata <- tidytuesdayR::tt_load('2022-12-20')
-tuesdata <- tidytuesdayR::tt_load(2022, week = 51)
+Weather_Forecast_Accuracy <- tidytuesdayR::tt_load('2022-12-20')
+Weather_Forecast_Accuracy <- tidytuesdayR::tt_load(2022, week = 51)
 
-weather_forecasts <- tuesdata$weather_forecasts
-cities <- tuesdata$cities
-outlook_meanings <- tuesdata$outlook_meanings
+weather_forecasts <- Weather_Forecast_Accuracy$weather_forecasts
+cities <- Weather_Forecast_Accuracy$cities
+outlook_meanings <- Weather_Forecast_Accuracy$outlook_meanings
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
 
 Make sure to load the data and use inline code for some of this information.
+
+This dataset represents to Weather Forecast Accuracy and is sourced from the USA National Weather Service. It encompasses 16 months of weather forecasts and subsequent observations for 167 cities across the United States. Weather_forecast Accuracy is divided into three sub-datasets, `weather_forecasts`, `cities`, and `outlook_meanings`.
+
+The first dataset we'll look at is `weather_forecasts`, which contains information on the 167 cities we'll be looking at. Specifically, this includes forecasted and observed temperatures, time differences between observations and forecasts, precipitation, forecast outlook and the presence of potential error. The second dataset we'll look at is `cities`, which contains geographic information such as latitude, longitude, and climate for 236 cities, including the 167 cities we'll be looking at. The last dataset, `outlook_meanings`, is the one that describes the aforementioned variable, `forecast_outlook`.
 
 ## Questions
 
