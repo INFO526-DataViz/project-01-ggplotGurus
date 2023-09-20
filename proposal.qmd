@@ -57,3 +57,46 @@ C. Clustering Cities Based on Regional Error Patterns:
 
 Finally, we will implement a dark mode design to achieve a modern and eye-catching aesthetic, and we will utilize the color theory to show the results. Also, in the data visualization we are creating as a heatmap, we will attempt to make it possible for users to be able to zoom in and out for a detailed exploration of specific regions.
 We hope that this visualization will not only provide answers to the scientific questions but also engage users with modern and interactive design elements, enhancing their understanding of the data and its implications.
+
+
+
+### **Question 2: Geographic Seasonality in Temperature Forecasting Errors**
+
+How do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?
+
+The objective is to determine whether certain regions in the U.S. exhibit seasonal variations in temperature forecast errors. For this, we'll use heatmaps overlaid on a map of the U.S.
+
+## Analysis plan
+
+Plans for answering the question 1:
+
+-   Variables Involved:
+
+    -   date: To determine the season (e.g., Winter, Spring, Summer, Fall).
+
+    -   city and state: For geographical mapping.
+
+    -   observed_temp and forecast_temp: To calculate the error.
+
+-   Variables to be Created:
+
+    -   season: Derived from the date variable.
+
+    -   temp_error: The difference between observed_temp and forecast_temp.
+
+    -   mean_temp_error_per_season: Average error for each city during each season.
+
+-   External Data:
+
+    -   No external data is required at this time. However, if deeper insights are needed in the future regarding specific climate anomalies or unique geographical features not captured in the current dataset, external sources might be sought.
+
+-   Analysis and Visualization:
+
+    -   Begin by segregating the data season-wise.
+
+    -   Compute the error for each observation and then average them seasonally for each city.
+
+    -   Plot this data on a geographical heatmap using the latitude and longitude data available in the cities dataset. The heatmap will showcase regions with the highest temperature forecasting errors, with distinct visuals for each season.
+
+By the end of this analysis, we aim to have a clear visualization that depicts regions with consistently high forecasting errors and to observe if there's a seasonality to these errors across different parts of the U.S.
+
