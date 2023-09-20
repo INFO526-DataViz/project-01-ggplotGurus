@@ -46,8 +46,39 @@ In summary, we are excited about the potential of our weather forecast data proj
 
 ## Questions
 
-The two questions you want to answer.
+Question 1: Spatial Distribution of Temperature Forecasting Errors
+
+How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
+
+
 
 ## Analysis plan
 
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+-  Question 1: Spatial Distribution of Temperature Forecasting Errors
+
+How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
+
+   This question is essential since errors in weather forecasting are the main reason for this data set to be created. To answer the question, we plan on using advanced geospatial data visualization techniques. To represent the data best, we will create an interactive heatmap  of the United States that displays the spatial distribution of temperature forecasting errors for U.S. cities on a map. This will be done by taking the following steps:
+
+
+A. Heatmap
+
+It will be generated using the variables:
+1. 	Latitude and
+2. 	Longitude: 
+3. 	cities 
+4. 	Temperature forecasting errors
+
+B. Temperature forecasting errors:
+
+Below are the variables that will be used to calculate temperature forecasting errors:
+1. 	Observed Temperature: 
+2. 	Forecasted Temperature: 
+
+
+C. Clustering Cities Based on Regional Error Patterns:
+
+1. Categorize cities by state.
+2. Calculate Regional Averages
+
+
