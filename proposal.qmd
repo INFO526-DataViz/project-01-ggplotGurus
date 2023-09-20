@@ -26,9 +26,15 @@ In summary, we are excited about the potential of our weather forecast data proj
 
 ## Questions
 
-Question 1: Spatial Distribution of Temperature Forecasting Errors
+Question 1:
 
 How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
+
+Question 2: 
+
+How do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?
+
+
 
 ## Analysis plan
 
