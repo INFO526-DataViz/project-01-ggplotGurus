@@ -40,7 +40,11 @@ This question is essential since errors in weather forecasting are the main reas
 
 A. Heatmap
 
-It will be generated using the variables: 1. Latitude and 2. Longitude: 3. cities 4. Temperature forecasting errors
+It will be generated using the variables: 
+1. Latitude and 
+2. Longitude: 
+3. cities 
+4. Temperature forecasting errors
 
 B. Temperature forecasting errors:
 
@@ -50,3 +54,6 @@ C. Clustering Cities Based on Regional Error Patterns:
 
 1.  Categorize cities by state.
 2.  Calculate Regional Averages
+
+Finally, we will implement a dark mode design to achieve a modern and eye-catching aesthetic, and we will utilize the color theory to show the results. Also, in the data visualization we are creating as a heatmap, we will attempt to make it possible for users to be able to zoom in and out for a detailed exploration of specific regions.
+We hope that this visualization will not only provide answers to the scientific questions but also engage users with modern and interactive design elements, enhancing their understanding of the data and its implications.
