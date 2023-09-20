@@ -1,5 +1,5 @@
 ---
-title: "Proposal title"
+title: "USA Weather Forecast Accuracy Analysis"
 subtitle: "Proposal"
 format: html
 editor: visual
@@ -7,9 +7,9 @@ editor: visual
 
 ## Dataset
 
-This dataset represents  Weather Forecast Accuracy and is sourced from the USA National Weather Service. It encompasses 16 months of weather forecasts and subsequent observations for 167 cities across the United States. Weather_forecast Accuracy is divided into three dimensions, `weather_forecasts`, `cities`, and `outlook_meanings`.
+This dataset represents Weather Forecast Accuracy and is sourced from the USA National Weather Service. We It encompasses 16 months of weather forecasts and subsequent observations for 167 cities across the United States. Weather_forecast Accuracy is divided into three dimensions, `weather_forecasts`, `cities`, and `outlook_meanings`.
 
-The first dataset we'll look at is `weather_forecasts`, which contains 651,968 observations of 10 variables. Specifically, this includes forecasted and observed temperatures, time differences between observations and forecasts, precipitation, forecast outlook and the presence of potential error. The second dataset we'll look at is `cities`, which contains 236 observations of 11 variables with geographic information such as latitude, longitude, and climate for 236 cities, including the 167 cities we'll be looking at. The last dataset, `outlook_meanings`, contains 23 observations of 2 variables and is the one that describes the aforementioned variable, `forecast_outlook`.
+The first dataset we'll look at is `weather_forecasts`, which contains 651,968 observations of 10 variables. Specifically, this includes factor variables like `city`, `state` and `forecast_outlook` or integer variables like temperature and forecast hours . The second dataset we'll look at is `cities`, which contains 236 observations of 11 variables with geographic information such as latitude, longitude, and climate for 236 cities, including the 167 cities we'll be looking at. The last dataset, `outlook_meanings`, contains 23 observations of 2 variables and is the one that describes the aforementioned variable, `forecast_outlook`.
 
 ## Why did we choose this dataset.
 
@@ -40,11 +40,7 @@ This question is essential since errors in weather forecasting are the main reas
 
 A. Heatmap
 
-It will be generated using the variables: 
-1. Latitude and 
-2. Longitude: 
-3. cities 
-4. Temperature forecasting errors
+It will be generated using the variables: 1. Latitude and 2. Longitude: 3. cities 4. Temperature forecasting errors
 
 B. Temperature forecasting errors:
 
@@ -55,10 +51,7 @@ C. Clustering Cities Based on Regional Error Patterns:
 1.  Categorize cities by state.
 2.  Calculate Regional Averages
 
-Finally, we will implement a dark mode design to achieve a modern and eye-catching aesthetic, and we will utilize the color theory to show the results. Also, in the data visualization we are creating as a heatmap, we will attempt to make it possible for users to be able to zoom in and out for a detailed exploration of specific regions.
-We hope that this visualization will not only provide answers to the scientific questions but also engage users with modern and interactive design elements, enhancing their understanding of the data and its implications.
-
-
+Finally, we will implement a dark mode design to achieve a modern and eye-catching aesthetic, and we will utilize the color theory to show the results. Also, in the data visualization we are creating as a heatmap, we will attempt to make it possible for users to be able to zoom in and out for a detailed exploration of specific regions. We hope that this visualization will not only provide answers to the scientific questions but also engage users with modern and interactive design elements, enhancing their understanding of the data and its implications.
 
 ### **Question 2: Geographic Seasonality in Temperature Forecasting Errors**
 
@@ -99,4 +92,3 @@ Plans for answering the question 1:
     -   Plot this data on a geographical heatmap using the latitude and longitude data available in the cities dataset. The heatmap will showcase regions with the highest temperature forecasting errors, with distinct visuals for each season.
 
 By the end of this analysis, we aim to have a clear visualization that depicts regions with consistently high forecasting errors and to observe if there's a seasonality to these errors across different parts of the U.S.
-
