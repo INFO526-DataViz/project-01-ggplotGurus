@@ -61,11 +61,15 @@ How do temperature forecasting errors vary across the U.S. during different seas
 
 How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
 
-This question is essential since errors in weather forecasting are the main reason for this data set to be created. To answer the question, we plan on using advanced geospatial data visualization techniques. To represent the data best, we will create an interactive heatmap of the United States that displays the spatial distribution of temperature forecasting errors for U.S. cities on a map. This will be done by taking the following steps:
+This question is essential since errors in weather forecasting are the main reason for this data set to be created. To answer the question, we plan on using advanced geospatial data visualization techniques. To represent the data best, we will create an interactive choropleth map of the United States that displays the spatial distribution of temperature forecasting errors for U.S. cities. This will be done by using the package leaflet and taking the following steps:
 
-A. Heatmap
+A. Choropleth Map
 
-It will be generated using the variables: 1. Latitude and 2. Longitude: 3. cities 4. Temperature forecasting errors
+It will be generated using the variables: 
+1. Latitude 
+2. Longitude
+3. cities 
+4. Temperature forecasting errors
 
 B. Temperature forecasting errors:
 
