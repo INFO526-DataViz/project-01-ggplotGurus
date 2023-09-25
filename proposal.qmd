@@ -13,7 +13,7 @@ if (!require("pacman"))
 pacman::p_load(tidyverse, tidytuesdayR)
 ```
 
-## Dataset
+> ## Dataset
 
 ```{r label: load-dataset, message=FALSE, warning=FALSE}
 #| label: load-dataset
@@ -29,60 +29,59 @@ This dataset represents Weather Forecast Accuracy and is sourced from the [USA N
 
 The first dataset we'll look at is `weather_forecasts`, which contains 651,968 observations of 10 variables. Specifically, this includes factor variables like `city`, `state` and `forecast_outlook` or integer variables like temperature and forecast hours. The second dataset we'll look at is `cities`, which contains 236 observations of 11 variables with geographic information such as latitude, longitude, and climate for 236 cities, including the 167 cities we'll be looking at. The last dataset, `outlook_meanings`, contains 23 observations of 2 variables and is the one that describes the aforementioned variable, `forecast_outlook`.
 
-## Why did we choose this dataset
+------------------------------------------------------------------------
+
+> ## Why did we choose this dataset
 
 Our Data Visualization class project requires us to work collaboratively on a dataset of our choice to create meaningful visualizations.
 
 After careful consideration, we have chosen to work with a weather forecast dataset, for several compelling reasons:
 
-1\. Richness and Depth: The dataset holds an extensive range of information, covering 16 months of forecasts and observations from 167 cities. With variables including temperature, humidity, precipitation, and wind speed, among others, this dataset offers an opportunity to visualize and analyze diverse aspects of weather patterns, enabling a comprehensive understanding of meteorological trends.
-
-2\. Learning Opportunities: Working with weather forecast data challenges us to apply the data visualization skills we acquired in class to a complex and dynamic dataset. This hands-on experience will undoubtedly enhance our proficiency in data analysis and visualization.
-
-3\. Historical connections:Weather has been one of the earliest uses of data visualization techniques. Early as 1875 Sir Francis Galton created the daily weather chart that was published in The Times newspaper. We aim to continue this legacy by being part of the innovation, in data visualization. Through this project we strive to push the boundaries of creating weather related data in todays era
-
-4\. Weather Intelligence Industry: Finally, our choice was motivated by the currently thriving weather intelligence industry. In today's data-driven world, companies like Tomorrow.io and EarthNetworks.comhave created a demand for precise and clear weather data and insights. This not only aligns with industry needs, but also provides us with a chance to enhance our data analysis and visualization skills in a highly relevant context.
+1.  Richness and Depth: The dataset holds an extensive range of information, covering 16 months of forecasts and observations from 167 cities. With variables including temperature, humidity, precipitation, and wind speed, among others, this dataset offers an opportunity to visualize and analyze diverse aspects of weather patterns, enabling a comprehensive understanding of meteorological trends.
+2.  Learning Opportunities: Working with weather forecast data challenges us to apply the data visualization skills we acquired in class to a complex and dynamic dataset. This hands-on experience will undoubtedly enhance our proficiency in data analysis and visualization.
+3.   Historical connections:Weather has been one of the earliest uses of data visualization techniques. Early as 1875 Sir Francis Galton created the daily weather chart that was published in The Times newspaper. We aim to continue this legacy by being part of the innovation, in data visualization. Through this project we strive to push the boundaries of creating weather related data in todays era
+4.   Weather Intelligence Industry: Finally, our choice was motivated by the currently thriving weather intelligence industry. In today's data-driven world, companies like Tomorrow.io and EarthNetworks.comhave created a demand for precise and clear weather data and insights. This not only aligns with industry needs, but also provides us with a chance to enhance our data analysis and visualization skills in a highly relevant context.
 
 In summary, we are excited about the potential of our weather forecast data project and are committed to producing exceptional visualizations. We look forward to using this dataset to create informative and engaging visualizations that showcase our skills and contribute meaningfully to the field of data visualization.
 
-## Questions
+------------------------------------------------------------------------
 
-Question 1:
+> ## Questions
 
-How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
+-   Question 1: How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
 
-Question 2:
+-   Question 2: How do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?
 
-How do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?
+------------------------------------------------------------------------
 
-## Analysis plan
+> ## Analysis Plan
 
--   **Question 1: Spatial Distribution of Temperature Forecasting Errors**
+### **Question 1: Spatial Distribution of Temperature Forecasting Errors** {style="color: blue"}
 
 How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
 
 This question is essential since errors in weather forecasting are the main reason for this data set to be created. To answer the question, we plan on using advanced geospatial data visualization techniques. To represent the data best, we will create an interactive choropleth map of the United States that displays the spatial distribution of temperature forecasting errors for U.S. cities. This will be done by using the package leaflet and taking the following steps:
 
-A. Choropleth Map
+-   Choropleth Map: It will be generated using the variables:
 
-It will be generated using the variables: 
-1. Latitude 
-2. Longitude
-3. cities 
-4. Temperature forecasting errors
+    -    Latitude
+    -   Longitude
+    -   Cities
+    -   Temperature forecasting errors
 
-B. Temperature forecasting errors:
+-   Temperature forecasting errors: Below are the variables that will be used to calculate temperature forecasting errors:
 
-Below are the variables that will be used to calculate temperature forecasting errors: 1. Observed Temperature: 2. Forecasted Temperature:
+    -    Observed Temperature.
+    -   Forecasted Temperature.
 
-C. Clustering Cities Based on Regional Error Patterns:
+-   Clustering Cities Based on Regional Error Patterns:
 
-1.  Categorize cities by state.
-2.  Calculate Regional Averages
+    -   Categorize cities by state.
+    -   Calculate Regional Averages
 
 Finally, we will implement a dark mode design to achieve a modern and eye-catching aesthetic, and we will utilize the color theory to show the results. Also, in the data visualization we are creating as a heatmap, we will attempt to make it possible for users to be able to zoom in and out for a detailed exploration of specific regions. We hope that this visualization will not only provide answers to the scientific questions but also engage users with modern and interactive design elements, enhancing their understanding of the data and its implications.
 
--   **Question 2: Geographic Seasonality in Temperature Forecasting Errors**
+### **Question 2: Geographic Seasonality in Temperature Forecasting Errors** {style="color: blue"}
 
 How do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?
 
