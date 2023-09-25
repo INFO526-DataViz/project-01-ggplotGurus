@@ -64,14 +64,14 @@ This question is essential since errors in weather forecasting are the main reas
 
 -   Choropleth Map: It will be generated using the variables:
 
-    -    Latitude
+    -   Latitude
     -   Longitude
     -   Cities
     -   Temperature forecasting errors
 
 -   Temperature forecasting errors: Below are the variables that will be used to calculate temperature forecasting errors:
 
-    -    Observed Temperature.
+    -   Observed Temperature.
     -   Forecasted Temperature.
 
 -   Clustering Cities Based on Regional Error Patterns:
