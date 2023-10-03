@@ -64,15 +64,15 @@ This question is essential since errors in weather forecasting are the main reas
 
 -   Choropleth Map: It will be generated using the variables:
 
-    -   Latitude
-    -   Longitude
-    -   Cities
-    -   Temperature forecasting errors
+    -   Latitude (type: double)
+    -   Longitude (type: double)
+    -   Cities (type: charecter)
+    -   Temperature forecasting errors (type: factor)
 
 -   Temperature forecasting errors: Below are the variables that will be used to calculate temperature forecasting errors:
 
-    -   Observed Temperature.
-    -   Forecasted Temperature.
+    -   Observed Temperature (Degrees Fahrenheit).
+    -   Forecasted Temperature (Degrees Fahrenheit).
 
 -   Clustering Cities Based on Regional Error Patterns:
 
@@ -91,19 +91,19 @@ Plans for answering the question 2:
 
 -   Variables Involved:
 
-    -   date: To determine the season (e.g., Winter, Spring, Summer, Fall).
+    -   date (type: integer) : To determine the season (e.g., Winter, Spring, Summer, Fall).
 
-    -   city and state: For geographical mapping.
+    -   city and state ( type: factor) : For geographical mapping.
 
-    -   observed_temp and forecast_temp: To calculate the error.
+    -   observed_temp and forecast_temp( type: integer) : To calculate the error.
 
 -   Variables to be Created:
 
-    -   season: Derived from the date variable.
+    -   season (type: charecter) : Derived from the date variable.
 
-    -   temp_error: The difference between observed_temp and forecast_temp.
+    -   temp_error (type: factor) : The difference between observed_temp and forecast_temp.
 
-    -   mean_temp_error_per_season: Average error for each city during each season.
+    -   mean_temp_error_per_season (type: factor) : Average error for each city during each season.
 
 -   External Data:
 
@@ -111,7 +111,7 @@ Plans for answering the question 2:
 
 -   Analysis and Visualization:
 
-    -   Begin by segregating the data season-wise.
+    -   Begin by segregating the data seasonally.
 
     -   Compute the error for each observation and then average them seasonally for each city.
 
