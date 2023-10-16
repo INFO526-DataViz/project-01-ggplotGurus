@@ -137,7 +137,7 @@
     "href": "presentation.html#question-2-geographic-seasonality-in-temperature-forecasting-errors",
     "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
     "section": "Question 2: Geographic Seasonality in Temperature Forecasting Errors",
-    "text": "Question 2: Geographic Seasonality in Temperature Forecasting Errors\nDo seasons impact Weather forecasting ?"
+    "text": "Question 2: Geographic Seasonality in Temperature Forecasting Errors\n \nDo seasons impact Weather forecasting ?"
   },
   {
     "objectID": "presentation.html#winter",
@@ -187,5 +187,12 @@
     "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
     "section": "Trend of Temperature Forecasting Errors over the years",
     "text": "Trend of Temperature Forecasting Errors over the years"
+  },
+  {
+    "objectID": "presentation.html#how-reliable-are-weather-forecasts",
+    "href": "presentation.html#how-reliable-are-weather-forecasts",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "How Reliable Are Weather Forecasts?",
+    "text": "How Reliable Are Weather Forecasts?"
   }
 ]

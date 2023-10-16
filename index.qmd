@@ -204,3 +204,13 @@ The created maps reveal interesting insights into the seasonality of temperature
 3\. **Seasonal Patterns :** The maps clearly illustrate the seasonal patterns of forecasting errors. For instance, errors tend to be lowest in Spring and Fall, which are transitional seasons with relatively stable weather conditions.
 
 In conclusion, these visualizations provide valuable insights into the seasonality of temperature forecasting errors across different U.S. states. Understanding these patterns can be beneficial for improving weather forecasting models and enhancing preparedness for various weather conditions.
+
+## References 
+
+-   National Weather Service: <https://www.weather.gov/>
+
+-   Quarto: <https://quarto.org/docs/presentations/revealjs/index.html#slide-backgrounds>
+
+-   <https://www.researchgate.net/publication/371697984_An_exploration_of_National_Weather_Service_daily_forecasts_using_R_Shiny>
+
+-   Frnda J, Durica M, Nedoma J, Zabka S, Martinek R, Kostelansky M. A Weather Forecast Model Accuracy Analysis and ECMWF Enhancement Proposal by Neural Network. Sensors (Basel). 2019 Nov 24;19(23):5144. doi: 10.3390/s19235144. PMID: 31771275; PMCID: PMC6928600.

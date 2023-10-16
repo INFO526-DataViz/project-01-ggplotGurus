@@ -3,9 +3,9 @@ title: "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy a
 subtitle: "INFO 526 - Fall 2023 - Project 1"
 author: "GGplot gurus- Swetha, Shalon, Deema, Kiwoon, Harsh"
 title-slide-attributes:
-  data-background-image: images/US map3.jpeg
-  data-background-size: stretch
-  data-background-opacity: "0.7"
+  data-background-image: images/US map.jpeg
+  data-background-size: cover
+  data-background-opacity: "0.5"
   data-slide-number: none
   data-background-position: center
   
@@ -61,9 +61,13 @@ outlook_meanings <- readr::read_csv('https://raw.githubusercontent.com/rfordatas
 
 ```
 
-# **How Reliable Are Weather Forecasts?** {style="text-align: center; color: green"}
+## **How Reliable Are Weather Forecasts?** {style="text-align: center; color: green"}
 
-![](images/forecast-reliability.jpg){fig-align="center" width="457"}
+&nbsp;
+
+&nbsp;
+
+![](images/forecast-reliability.jpg){style="align: center" fig-align="center" width="457"}
 
 ## Dataset {style="text-align: center"}
 
@@ -73,7 +77,9 @@ The dataset Weather_forecast_Accuracy includes 16 months of forecasts and observ
 
 ## Question 2: Geographic Seasonality in Temperature Forecasting Errors {style="text-align: center"}
 
-Do seasons impact Weather forecasting ?
+&nbsp;
+
+####                                           Do seasons impact Weather forecasting ?
 
 ```{r}
 
@@ -122,21 +128,21 @@ plot_seasonal_map(winter_data, "Winter")
 
 ## Spring
 
-```{r}
+```{r spring plot}
 spring_data <- error_by_city_season %>% filter(season == "Spring")
 plot_seasonal_map(spring_data, "Spring")
 ```
 
 ## Summer
 
-```{r}
+```{r summer plot}
 summer_data <- error_by_city_season %>% filter(season == "Summer")
 plot_seasonal_map(summer_data, "Summer")
 ```
 
 ## Fall
 
-```{r}
+```{r fall plot}
 fall_data <- error_by_city_season %>% filter(season == "Fall")
 plot_seasonal_map(fall_data, "Fall")
 ```
