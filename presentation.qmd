@@ -147,9 +147,11 @@ ggplot(city_errors, aes(x = as.factor(city_index), y = mean_temp_error)) +
 
 
 ```
----
+
+------------------------------------------------------------------------
 
 #### Identifyng error per cluster on a map {style="text-align: center"}
+
 ```{r, warning=FALSE}
 outlook_translations <- tribble(
   ~forecast_outlook, ~meaning,
@@ -206,7 +208,6 @@ ggplot(data = city_errors_map) +
   geom_polygon(data = map_data("usa"), aes(x = long, y = lat, group = group), fill = NA, color = "white") # Adding US borders
 
 ```
-
 
 ## Question 2: Geographic Seasonality in Temperature Forecasting Errors {style="text-align: center"}
 
