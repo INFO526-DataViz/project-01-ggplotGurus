@@ -50,7 +50,7 @@ The dataset is split into three parts. The first part, weather_forecasts, is a b
 
 With all this data in hand, our project wants to dig into where and when temperature forecasts tend to be most accurate or where they might miss the mark. By the end, we hope to give everyone a clearer idea of how much they can trust the weather forecasts they hear every day.
 
-## Question 1: How does the error in temperature prediction vary across the United States? And can we identify clusters of cities with similar error patterns?
+## Question 1: How does the error in temperature prediction vary across the United States? And can we identify? What are the cities with the highest error rates? Are there any regional insights that can be inferred from this dataset? 
 
 ------------------------------------------------------------------------
 
@@ -60,9 +60,89 @@ In the first question, we investigated the errors in weather forecasts and their
 
 ### Approach
 
-To assess the error in temperature prediction across the U.S. and identify clusters of cities with similar error patterns, we utilized advanced geospatial data visualization techniques. Our methodology involved the creation of a choropleth map using the variables `lat` for latitude, `lon` for longitude and `city` in the dataset, presenting a clear visual representation of `temperature_forecasting_errors`(Degrees Fahrenheit) for cities. After categorizing the cities into states, we visualized the average gap per state so that we could identify patterns, making local inferences about the question.
+To assess the error in temperature prediction across the U.S. and identify clusters of cities with similar error patterns, we first utilized a circuler bar plot, that shows accuretly the mean tempreture prediction error by cities
+
+Then we used an advanced geospatial data visualization techniques. Our methodology involved the creation of a choropleth map using the variables `lat` for latitude, `lon` for longitude and `city` in the dataset, presenting a clear visual representation of `temperature_forecasting_errors`(Degrees Fahrenheit) for cities. After categorizing the cities into states, we visualized the average gap per state so that we could identify patterns, making local inferences about the question.
 
 ### Analysis
+
+### Plot 1
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE, 
+                      message = FALSE)
+
+
+library(ggplot2)
+library(dplyr)
+
+# Read the data
+weather_forecasts <- read.csv("https://raw.githubusercontent.com/speegled/weather_forecasts/main/data/email_data_expanded.csv")
+cities <- read.csv("https://raw.githubusercontent.com/speegled/weather_forecasts/main/data/cities.csv")
+
+# Calculate temperature prediction error
+weather_forecasts <- weather_forecasts %>%
+  mutate(temp_error = observed_temp - forecast_temp)
+
+# Group by city and calculate mean temperature prediction error
+city_errors <- weather_forecasts %>% 
+  group_by(city) %>% 
+  summarise(mean_temp_error = mean(temp_error, na.rm = TRUE), .groups = 'drop')
+
+# Add an index for each city for plotting
+city_errors$city_index <- seq(1, nrow(city_errors))
+
+# Prepare a dataframe for labels
+label_data <- city_errors
+
+# Calculate the ANGLE of the labels
+number_of_bar <- nrow(label_data)
+angle <- 90 - 360 * (label_data$city_index - 0.5) / number_of_bar
+
+# Adjust hjust based on side of plot
+label_data$hjust <- ifelse(angle < -90 & label_data$mean_temp_error > 0, 1, 
+                           ifelse(angle >= -90 & label_data$mean_temp_error > 0, 0, 
+                                  ifelse(angle >= -90 & label_data$mean_temp_error <= 0, 0, 1)))
+
+# Adjust the angle for negative bars
+label_data$angle <- ifelse(angle < -90, angle + 180, angle)
+
+# Calculate an offset for negative bar labels
+offset <- max(abs(city_errors$mean_temp_error)) * -0.5
+
+# Update the y position of labels based on mean_temp_error direction
+label_data$label_y <- ifelse(label_data$mean_temp_error <= 0, 
+                             label_data$mean_temp_error - offset,
+                             label_data$mean_temp_error + 0)
+
+# Circular Barplot with city names
+ggplot(city_errors, aes(x = as.factor(city_index), y = mean_temp_error)) + 
+  geom_bar(stat = "identity", fill = "red") + 
+  geom_text(data = label_data, aes(label = city, y = label_y, angle = angle, hjust = hjust), 
+            color = "white", size = 1.5) + 
+  ylim(-max(abs(city_errors$mean_temp_error)), max(abs(city_errors$mean_temp_error))) + 
+  theme_minimal() + 
+  theme(
+    plot.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black"),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    plot.title = element_text(color = "white")  # Set title text color to white
+  ) + 
+  coord_polar(theta = "x") + 
+  labs(title = "Mean Temperature Prediction Error by City")
+
+,,,
+
+
 
 ### Discussion
 
