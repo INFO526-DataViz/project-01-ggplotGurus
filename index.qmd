@@ -63,7 +63,67 @@ And we methodology involved the creation of a choropleth map using the variables
 ### Analysis
 
 ### Plot 1
+```{r}
+# Calculate temperature prediction error
+weather_forecasts <- weather_forecasts %>%
+  mutate(temp_error = observed_temp - forecast_temp)
 
+# Group by city and calculate mean temperature prediction error
+city_errors <- weather_forecasts %>% 
+  group_by(city) %>% 
+  summarise(mean_temp_error = mean(temp_error, na.rm = TRUE), .groups = 'drop')
+
+# Add an index for each city for plotting
+city_errors$city_index <- seq(1, nrow(city_errors))
+
+# Prepare a dataframe for labels
+label_data <- city_errors
+
+# Calculate the ANGLE of the labels
+number_of_bar <- nrow(label_data)
+angle <- 90 - 360 * (label_data$city_index - 0.5) / number_of_bar
+
+# Adjust hjust based on side of plot
+label_data$hjust <- ifelse(angle < -90 & label_data$mean_temp_error > 0, 1, 
+                           ifelse(angle >= -90 & label_data$mean_temp_error > 0, 0, 
+                                  ifelse(angle >= -90 & label_data$mean_temp_error <= 0, 0, 1)))
+
+# Adjust the angle for negative bars
+label_data$angle <- ifelse(angle < -90, angle + 180, angle)
+
+# Calculate an offset for negative bar labels
+offset <- max(abs(city_errors$mean_temp_error)) * -0.5
+
+# Update the y position of labels based on mean_temp_error direction
+label_data$label_y <- ifelse(label_data$mean_temp_error <= 0, 
+                             label_data$mean_temp_error - offset,
+                             label_data$mean_temp_error + 0)
+
+# Circular Barplot with city names
+# Circular Barplot with city names
+ggplot(city_errors, aes(x = as.factor(city_index), y = mean_temp_error)) + 
+  geom_bar(stat = "identity", fill = "red") + 
+  geom_text(data = label_data, aes(label = city, y = label_y, angle = angle, hjust = hjust), 
+            color = "white", size = 1.5) + 
+  ylim(-max(abs(city_errors$mean_temp_error)), max(abs(city_errors$mean_temp_error))) + 
+  theme_minimal() + 
+  theme(
+    plot.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black"),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    plot.title = element_text(color = "white")  # Set title text color to white
+  ) + 
+  coord_polar(theta = "x") + 
+  labs(title = "Mean Temperature Prediction Error by City")
+```
 ### Discussion
 
 Upon examination of the provided plots:
