@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "USA Weather Forecast Accuracy Analysis",
+    "section": "",
+    "text": "In this project, our team is looking at a Weather Forecast Accuracy dataset provided by the USA National Weather Service. Our aim is to learn which areas of the U.S. struggle with weather prediction and the possible reasons why. Specifically, we focussed to answer to key questions: First, where in the U.S are the predictions most and least accurate? Second, are there certain times of the year when these predictions tend to be more or less accurate? We will also include in-depth discussions of our approach and method and include why our analysis was performed the way it was. By using heatmaps and other visuals, we hope to make our findings easy to understand. Our project aims to give insights on temperature predictions and help people understand where."
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "USA Weather Forecast Accuracy Analysis",
+    "section": "",
+    "text": "In this project, our team is looking at a Weather Forecast Accuracy dataset provided by the USA National Weather Service. Our aim is to learn which areas of the U.S. struggle with weather prediction and the possible reasons why. Specifically, we focussed to answer to key questions: First, where in the U.S are the predictions most and least accurate? Second, are there certain times of the year when these predictions tend to be more or less accurate? We will also include in-depth discussions of our approach and method and include why our analysis was performed the way it was. By using heatmaps and other visuals, we hope to make our findings easy to understand. Our project aims to give insights on temperature predictions and help people understand where."
+  },
+  {
+    "objectID": "index.html#introduction",
+    "href": "index.html#introduction",
+    "title": "USA Weather Forecast Accuracy Analysis",
+    "section": "Introduction",
+    "text": "Introduction\n\nWeather forecasts are a big deal. Every day, people and businesses depend on them to make all kinds of decisions. Think about it: Farmers use forecasts to decide when to plant crops. Airlines and trucking companies need them to plan routes. Even ordinary folks use them to plan picnics or decide on what to wear. Getting these predictions right can make a big difference.\nSo, how often are these forecasts on the mark? That’s what we wanted to figure out. We picked a dataset called Weather Forecast Accuracy from the USA National Weather Service. This dataset gives us a peek into the weather predictions and what really happened over 16 months in 167 U.S. cities.\nThe dataset is split into three parts. The first part, weather_forecasts, is a big list with over 650,000 observations, giving us details like which city and state the forecast was for, what the expected and actual temperatures were, and when the prediction was made. The second part, cities, provides details about 236 cities, like where they are located. And the last part, outlook_meanings, helps us understand more about the types of forecasts.\nWith all this data in hand, our project wants to dig into where and when temperature forecasts tend to be most accurate or where they might miss the mark. By the end, we hope to give everyone a clearer idea of how much they can trust the weather forecasts they hear every day."
+  },
+  {
+    "objectID": "index.html#question-1-how-does-the-error-in-temperature-prediction-vary-across-the-united-states-and-can-we-identify-clusters-of-cities-with-similar-error-patterns",
+    "href": "index.html#question-1-how-does-the-error-in-temperature-prediction-vary-across-the-united-states-and-can-we-identify-clusters-of-cities-with-similar-error-patterns",
+    "title": "USA Weather Forecast Accuracy Analysis",
+    "section": "Question 1: How does the error in temperature prediction vary across the United States? And can we identify clusters of cities with similar error patterns?",
+    "text": "Question 1: How does the error in temperature prediction vary across the United States? And can we identify clusters of cities with similar error patterns?\n\n\nIntroduction\nIn the first question, we investigated the errors in weather forecasts and their relationship to geographic clusters in the U.S. Since the advent of weather forecasting, errors in weather forecasts have always been a concern of ours, so we wanted to see what factors contribute to these errors. We thought that regional differences might be a key reason of weather forecast errors, so we analyzed the differences in forecasts across regions to see if they were significantly different for each clusters of regions.\n\n\nApproach\nTo assess the error in temperature prediction across the U.S. and identify clusters of cities with similar error patterns, we utilized advanced geospatial data visualization techniques. Our methodology involved the creation of a choropleth map using the variables lat for latitude, lon for longitude and city in the dataset, presenting a clear visual representation of temperature_forecasting_errors(Degrees Fahrenheit) for cities. After categorizing the cities into states, we visualized the average gap per state so that we could identify patterns, making local inferences about the question.\n\n\nAnalysis\n\n\nDiscussion\nUpon examination of the provided plots:\n\nMean Temperature Prediction Error by State:\n\nCertain states display a higher mean error in temperature prediction compared to others. For instance, AK (Alaska) has the highest error, followed by states like OR (Oregon), HI (Hawaii), and NV (Nevada). On the other end, states like SC (South Carolina) exhibit the least prediction error.\nThis variation might be due to the geographical intricacies and climatic conditions of certain states, making them more challenging to predict.\n\nMean Temperature Prediction Error Across US Cities:\n\nThe scatter plot exhibits clusters of cities with similar temperature prediction errors based on their latitudinal and longitudinal positions.\nWe notice cities in the northwest (higher latitudes and lower longitudes) tend to have higher errors. In contrast, cities in the southeast exhibit fewer errors.\nThis clustering indicates potential regional factors influencing the accuracy of predictions. Regions with more volatile weather patterns or fewer weather observation resources might account for higher discrepancies.\n\n\nIn summary, while the U.S. National Weather Service provides extensive forecasting, certain regions and cities experience more significant temperature prediction errors than others. Understanding these discrepancies and their underlying causes can pave the way for improvements in forecasting models, ensuring more accurate and reliable predictions in the future."
+  },
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "USA Weather Forecast Accuracy Analysis",
+    "section": "",
+    "text": "if (!require(\"pacman\"))\n  install.packages(\"pacman\")\npacman::p_load(tidyverse, tidytuesdayR)\n\npackage 'credentials' successfully unpacked and MD5 sums checked\npackage 'zip' successfully unpacked and MD5 sums checked\npackage 'gitcreds' successfully unpacked and MD5 sums checked\npackage 'httr2' successfully unpacked and MD5 sums checked\npackage 'ini' successfully unpacked and MD5 sums checked\npackage 'desc' successfully unpacked and MD5 sums checked\npackage 'gert' successfully unpacked and MD5 sums checked\npackage 'gh' successfully unpacked and MD5 sums checked\npackage 'rprojroot' successfully unpacked and MD5 sums checked\npackage 'whisker' successfully unpacked and MD5 sums checked\npackage 'usethis' successfully unpacked and MD5 sums checked\npackage 'tidytuesdayR' successfully unpacked and MD5 sums checked\n\nThe downloaded binary packages are in\n    C:\\Users\\sweth\\AppData\\Local\\Temp\\Rtmpg1js2z\\downloaded_packages\n\n\n\nDataset\n\n\nweather_forecasts &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-12-20/weather_forecasts.csv')\ncities &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-12-20/cities.csv')\noutlook_meanings &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-12-20/outlook_meanings.csv')\n\nThis dataset represents Weather Forecast Accuracy and is sourced from the USA National Weather Service. You can check out the dataset in Tidytuesday It encompasses 16 months of weather forecasts and subsequent observations for 167 cities across the United States. Weather_forecast_Accuracy is divided into three dimensions, weather_forecasts, cities, and outlook_meanings.\nThe first dataset we’ll look at is weather_forecasts, which contains 651,968 observations of 10 variables. Specifically, this includes factor variables like city, state and forecast_outlook or integer variables like temperature and forecast hours. The second dataset we’ll look at is cities, which contains 236 observations of 11 variables with geographic information such as latitude, longitude, and climate for 236 cities, including the 167 cities we’ll be looking at. The last dataset, outlook_meanings, contains 23 observations of 2 variables and is the one that describes the aforementioned variable, forecast_outlook.\n\n\nWhy did we choose this dataset\n\nOur Data Visualization class project requires us to work collaboratively on a dataset of our choice to create meaningful visualizations.\nAfter careful consideration, we have chosen to work with a weather forecast dataset, for several compelling reasons:\n\nRichness and Depth: The dataset holds an extensive range of information, covering 16 months of forecasts and observations from 167 cities. With variables including temperature, humidity, precipitation, and wind speed, among others, this dataset offers an opportunity to visualize and analyze diverse aspects of weather patterns, enabling a comprehensive understanding of meteorological trends.\nLearning Opportunities: Working with weather forecast data challenges us to apply the data visualization skills we acquired in class to a complex and dynamic dataset. This hands-on experience will undoubtedly enhance our proficiency in data analysis and visualization.\nHistorical connections:Weather has been one of the earliest uses of data visualization techniques. Early as 1875 Sir Francis Galton created the daily weather chart that was published in The Times newspaper. We aim to continue this legacy by being part of the innovation, in data visualization. Through this project we strive to push the boundaries of creating weather related data in todays era\nWeather Intelligence Industry: Finally, our choice was motivated by the currently thriving weather intelligence industry. In today’s data-driven world, companies like Tomorrow.io and EarthNetworks.comhave created a demand for precise and clear weather data and insights. This not only aligns with industry needs, but also provides us with a chance to enhance our data analysis and visualization skills in a highly relevant context.\n\nIn summary, we are excited about the potential of our weather forecast data project and are committed to producing exceptional visualizations. We look forward to using this dataset to create informative and engaging visualizations that showcase our skills and contribute meaningfully to the field of data visualization.\n\n\nQuestions\n\n\nQuestion 1: How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?\nQuestion 2: How do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?\n\n\n\nAnalysis Plan\n\n\nQuestion 1: Spatial Distribution of Temperature Forecasting Errors\nHow does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?\nThis question is essential since errors in weather forecasting are the main reason for this data set to be created. To answer the question, we plan on using advanced geospatial data visualization techniques. To represent the data best, we will create an interactive choropleth map of the United States that displays the spatial distribution of temperature forecasting errors for U.S. cities. This will be done by using the package leaflet and taking the following steps:\n\nChoropleth Map: It will be generated using the variables:\n\nLatitude (type: double)\nLongitude (type: double)\nCities (type: charecter)\nTemperature forecasting errors (type: factor)\n\nTemperature forecasting errors: Below are the variables that will be used to calculate temperature forecasting errors:\n\nObserved Temperature (Degrees Fahrenheit).\nForecasted Temperature (Degrees Fahrenheit).\n\nClustering Cities Based on Regional Error Patterns:\n\nCategorize cities by state.\nCalculate Regional Averages\n\n\nFinally, we will implement a dark mode design to achieve a modern and eye-catching aesthetic, and we will utilize the color theory to show the results. Also, in the data visualization we are creating as a heatmap, we will attempt to make it possible for users to be able to zoom in and out for a detailed exploration of specific regions. We hope that this visualization will not only provide answers to the scientific questions but also engage users with modern and interactive design elements, enhancing their understanding of the data and its implications.\n\n\nQuestion 2: Geographic Seasonality in Temperature Forecasting Errors\nHow do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?\nThe objective is to determine whether certain regions in the U.S. exhibit seasonal variations in temperature forecast errors. For this, we’ll use heatmaps overlaid on a map of the U.S.\nPlans for answering the question 2:\n\nVariables Involved:\n\ndate (type: integer) : To determine the season (e.g., Winter, Spring, Summer, Fall).\ncity and state ( type: factor) : For geographical mapping.\nobserved_temp and forecast_temp( type: integer) : To calculate the error.\n\nVariables to be Created:\n\nseason (type: charecter) : Derived from the date variable.\ntemp_error (type: factor) : The difference between observed_temp and forecast_temp.\nmean_temp_error_per_season (type: factor) : Average error for each city during each season.\n\nExternal Data:\n\nNo external data is required at this time. However, if deeper insights are needed in the future regarding specific climate anomalies or unique geographical features not captured in the current dataset, external sources might be sought.\n\nAnalysis and Visualization:\n\nBegin by segregating the data seasonally.\nCompute the error for each observation and then average them seasonally for each city.\nPlot this data on a geographical heatmap using the latitude and longitude data available in the cities dataset. The heatmap will showcase regions with the highest temperature forecasting errors, with distinct visuals for each season.\n\n\nBy the end of this analysis, we aim to have a clear visualization that depicts regions with consistently high forecasting errors and to observe if there’s a seasonality to these errors across different parts of the U.S."
+  },
+  {
+    "objectID": "presentation.html",
+    "href": "presentation.html",
+    "title": "Project title",
+    "section": "",
+    "text": "The presentation is created using the Quarto CLI\n## sets the start of a new slide\n\n\n\n\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\n\n\n\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\n\n\n\nWarning: Removed 2 rows containing missing values (`geom_point()`).\n\n\n\n\n\n\n\n\n\n\n\nSome text\ngoes here"
+  },
+  {
+    "objectID": "presentation.html#quarto",
+    "href": "presentation.html#quarto",
+    "title": "Project title",
+    "section": "",
+    "text": "The presentation is created using the Quarto CLI\n## sets the start of a new slide"
+  },
+  {
+    "objectID": "presentation.html#layouts",
+    "href": "presentation.html#layouts",
+    "title": "Project title",
+    "section": "",
+    "text": "You can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis"
+  },
+  {
+    "objectID": "presentation.html#code",
+    "href": "presentation.html#code",
+    "title": "Project title",
+    "section": "",
+    "text": "# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
+  },
+  {
+    "objectID": "presentation.html#plots",
+    "href": "presentation.html#plots",
+    "title": "Project title",
+    "section": "",
+    "text": "Warning: Removed 2 rows containing missing values (`geom_point()`)."
+  },
+  {
+    "objectID": "presentation.html#plot-and-text",
+    "href": "presentation.html#plot-and-text",
+    "title": "Project title",
+    "section": "",
+    "text": "Some text\ngoes here"
+  },
+  {
+    "objectID": "presentation.html#tables",
+    "href": "presentation.html#tables",
+    "title": "Project title",
+    "section": "Tables",
+    "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale"
+  },
+  {
+    "objectID": "presentation.html#images",
+    "href": "presentation.html#images",
+    "title": "Project title",
+    "section": "Images",
+    "text": "Images\n\n\n\nImage credit: Danielle Navarro, Percolate."
+  },
+  {
+    "objectID": "presentation.html#math-expressions",
+    "href": "presentation.html#math-expressions",
+    "title": "Project title",
+    "section": "Math Expressions",
+    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
+  },
+  {
+    "objectID": "presentation.html#feeling-adventurous",
+    "href": "presentation.html#feeling-adventurous",
+    "title": "Project title",
+    "section": "Feeling adventurous?",
+    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+  },
+  {
+    "objectID": "presentation.html#footnotes",
+    "href": "presentation.html#footnotes",
+    "title": "Project title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nAnd add footnotes↩︎"
+  },
+  {
+    "objectID": "index.html#question-2-geographic-seasonality-in-temperature-forecasting-errors",
+    "href": "index.html#question-2-geographic-seasonality-in-temperature-forecasting-errors",
+    "title": "USA Weather Forecast Accuracy Analysis",
+    "section": "Question 2: Geographic Seasonality in Temperature Forecasting Errors",
+    "text": "Question 2: Geographic Seasonality in Temperature Forecasting Errors\n\n\nIntroduction\nIn this data visualization project, we look into the “weather_forecasts” dataset from TidyTuesday. This dataset provides us with information about how accurate temperature forecasts are in different cities across the United States. It contains data on both observed temperatures, the temperatures that were predicted, the locations of these cities, and the time of year when these forecasts were made. Our primary aim is to examine how the average errors in temperature forecasts change depending on the season and location. This analysis can shed light on whether temperature forecasts are more accurate at certain times of the year and in specific geographic areas.\n\n\nApproach\nTo determine whether the certain regions in the U.S. exhibit seasonal variations in temperature forecast errors we used heatmaps overlaid on a map of the U.S. Our chosen visualization method is a series of heatmaps, each corresponding to a specific season, overlaid on a map of the U.S. We also created a time series plot to analyse the mean temperature error against time, offering insights into periods of increased forecasting challenges\n\nSeasonal Classification: We first classified each date into its respective season, i.e., Winter, Spring, Summer, or Fall, based on the month. This helped us group data seasonally and observe trends specific to different times of the year.\nCalculating Forecast Errors: We derived the temperature error by subtracting the forecasted temperature from the observed temperature. This gives us an idea of how accurate the forecast was, with positive values indicating the actual temperature was warmer than forecasted and negative values indicating it was cooler.\nAggregating Errors: To obtain a comprehensive view, we grouped our data by city, state, and season. We then calculated the mean temperature error for each group, giving us an average measure of how off the forecasts were for each city during each season.\nData Joining: We merged this aggregated error data with geographic information of the cities, which provides us with the latitude and longitude needed for mapping.\nMapping Errors: We then used the usmap and sf packages to create a heatmap for each season. The geographical heatmap helps visualize regions with the highest temperature forecasting errors. Darker shades indicate higher errors, making it easy to spot regions that frequently get their forecasts wrong.\nVisualization: Four separate heatmaps were created, one for each season - Winter, Spring, Summer, and Fall. These visualizations allow for easy comparison of forecasting accuracy across different parts of the U.S. during different times of the year.Apart from the seasonal heatmaps we also included a time-series analysis. We plotted the trend of temperature forecasting errors over the entire time frame available in the dataset. This provides insights into whether there’s a general improvement or degradation in forecasting accuracy over time, or if there are any anomalies or notable events impacting forecasting accuracy.\n\n\n\nAnalysis\n\nTemperature forecasting errors - Seasonally\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# A tibble: 4 × 3\n# Groups:   season [4]\n  season city      mean_temp_error\n  &lt;chr&gt;  &lt;chr&gt;               &lt;dbl&gt;\n1 Winter FAIRBANKS            2.55\n2 Fall   HELENA               2.87\n3 Summer HELENA               2.14\n4 Spring MILWAUKEE            2.39\n\n\n# A tibble: 4 × 3\n# Groups:   season [4]\n  season city         mean_temp_error\n  &lt;chr&gt;  &lt;chr&gt;                  &lt;dbl&gt;\n1 Fall   AUSTIN                -1.10 \n2 Summer AUSTIN                -1.59 \n3 Spring JACKSONVILLE          -1.22 \n4 Winter JACKSONVILLE          -0.340\n\n\n\n\nTrend of Temperacture Forecasting Errors over the years\n\n\n\n\n\n\n\n\nDiscussion\nThe created maps reveal interesting insights into the seasonality of temperature forecasting errors. Here are some key observations:\n1. Winter vs Summer : The maps show that temperature forecasting errors tend to be higher in Winter compared to Summer. This could be due to the increased complexity of predicting temperature changes during the colder months.\n2. Geographic Variations : The maps also highlight regional variations in forecasting accuracy. Some states consistently exhibit lower errors, while others experience higher errors across all seasons. These variations may be influenced by local climate patterns and topography.\n3. Seasonal Patterns : The maps clearly illustrate the seasonal patterns of forecasting errors. For instance, errors tend to be lowest in Spring and Fall, which are transitional seasons with relatively stable weather conditions.\nIn conclusion, these visualizations provide valuable insights into the seasonality of temperature forecasting errors across different U.S. states. Understanding these patterns can be beneficial for improving weather forecasting models and enhancing preparedness for various weather conditions."
+  },
+  {
+    "objectID": "presentation.html#data",
+    "href": "presentation.html#data",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Data",
+    "text": "Data\nThe dataset Weather_forecast_Accuracy includes 16 months of forecasts and observations from 167 cities. Weather_forecast_Accuracy is divided into three dimensions, weather_forecasts, cities, and outlook_meanings."
+  },
+  {
+    "objectID": "presentation.html#question-1-how-does-the-error-in-temperature-prediction-vary-across-the-united-states-and-can-we-identify-clusters-of-cities-with-similar-error-patterns",
+    "href": "presentation.html#question-1-how-does-the-error-in-temperature-prediction-vary-across-the-united-states-and-can-we-identify-clusters-of-cities-with-similar-error-patterns",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Question 1: How does the error in temperature prediction vary across the United States? And can we identify clusters of cities with similar error patterns?",
+    "text": "Question 1: How does the error in temperature prediction vary across the United States? And can we identify clusters of cities with similar error patterns?"
+  },
+  {
+    "objectID": "presentation.html#question-2-geographic-seasonality-in-temperature-forecasting-errors",
+    "href": "presentation.html#question-2-geographic-seasonality-in-temperature-forecasting-errors",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Question 2: Geographic Seasonality in Temperature Forecasting Errors",
+    "text": "Question 2: Geographic Seasonality in Temperature Forecasting Errors\nDo seasons impact Weather forecasting ?"
+  },
+  {
+    "objectID": "presentation.html#winter",
+    "href": "presentation.html#winter",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Winter",
+    "text": "Winter"
+  },
+  {
+    "objectID": "presentation.html#summer",
+    "href": "presentation.html#summer",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Summer",
+    "text": "Summer"
+  },
+  {
+    "objectID": "presentation.html#spring",
+    "href": "presentation.html#spring",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Spring",
+    "text": "Spring"
+  },
+  {
+    "objectID": "presentation.html#fall",
+    "href": "presentation.html#fall",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Fall",
+    "text": "Fall"
+  },
+  {
+    "objectID": "presentation.html#dataset",
+    "href": "presentation.html#dataset",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Dataset",
+    "text": "Dataset\nThe dataset Weather_forecast_Accuracy includes 16 months of forecasts and observations from 167 cities. Weather_forecast_Accuracy is divided into three dimensions, weather_forecasts, cities, and outlook_meanings."
+  },
+  {
+    "objectID": "presentation.html#trend-of-temperacture-forecasting-errors-over-the-years",
+    "href": "presentation.html#trend-of-temperacture-forecasting-errors-over-the-years",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Trend of Temperacture Forecasting Errors over the years",
+    "text": "Trend of Temperacture Forecasting Errors over the years"
+  },
+  {
+    "objectID": "presentation.html#trend-of-temperature-forecasting-errors-over-the-years",
+    "href": "presentation.html#trend-of-temperature-forecasting-errors-over-the-years",
+    "title": "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S.",
+    "section": "Trend of Temperature Forecasting Errors over the years",
+    "text": "Trend of Temperature Forecasting Errors over the years"
+  }
+]

@@ -78,7 +78,7 @@ Upon examination of the provided plots:
 
 In summary, while the U.S. National Weather Service provides extensive forecasting, certain regions and cities experience more significant temperature prediction errors than others. Understanding these discrepancies and their underlying causes can pave the way for improvements in forecasting models, ensuring more accurate and reliable predictions in the future.
 
-## Question 2: **Geographic Seasonality in Temperature Forecasting Errors**
+## Question 2: Geographic Seasonality in Temperature Forecasting Errors
 
 ------------------------------------------------------------------------
 
