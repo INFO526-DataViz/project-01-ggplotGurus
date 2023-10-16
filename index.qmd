@@ -273,7 +273,7 @@ plot_seasonal_map(fall_data, "Fall")
 
 ```
 
-```{r q2-viz1-error}
+```{r q2-viz1-error, echo=FALSE, include=FALSE }
 
 
 # Cities with highest and lowest average errors in each season
