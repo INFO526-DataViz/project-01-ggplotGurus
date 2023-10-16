@@ -62,7 +62,7 @@ And we methodology involved the creation of a choropleth map using the variables
 
 ### Analysis
 
-### Plot 1
+##### Plot 1
 ```{r}
 # Calculate temperature prediction error
 weather_forecasts <- weather_forecasts %>%
@@ -124,6 +124,13 @@ ggplot(city_errors, aes(x = as.factor(city_index), y = mean_temp_error)) +
   coord_polar(theta = "x") + 
   labs(title = "Mean Temperature Prediction Error by City")
 ```
+
+##### Plot 2
+```{r}
+
+```
+
+
 ### Discussion
 
 Upon examination of the provided plots:

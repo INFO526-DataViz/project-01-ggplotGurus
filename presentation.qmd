@@ -82,6 +82,7 @@ The dataset Weather_forecast_Accuracy includes 16 months of forecasts and observ
 ## Question 1: How does the error in temperature prediction vary across the United States?  Can we identify clusters of cities with similar error patterns? {style="text-align: center"}
 
 #### Visualize the mean temperature prediction error by city
+---
 
 ```{r}
 # Calculate temperature prediction error
@@ -142,7 +143,7 @@ ggplot(city_errors, aes(x = as.factor(city_index), y = mean_temp_error)) +
     plot.title = element_text(color = "white")  # Set title text color to white
   ) + 
   coord_polar(theta = "x") + 
-  labs(title = "Mean Temperature Prediction Error by City")
+  labs(title = "Mean Temperature Prediction Error \nby City")
 
 
 ```
