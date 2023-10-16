@@ -5,9 +5,10 @@ format: html
 editor: visual
 ---
 
-```{r label: load-pkgs, message=FALSE, warning=FALSE}
+```{r}
 #| label: load-pkgs
 #| message: false
+#| warning: false
 if (!require("pacman"))
   install.packages("pacman")
 pacman::p_load(tidyverse, tidytuesdayR)
@@ -15,7 +16,7 @@ pacman::p_load(tidyverse, tidytuesdayR)
 
 > ## Dataset
 
-```{r label: load-dataset, message=FALSE, warning=FALSE}
+```{r}
 #| label: load-dataset
 #| message: false
 #| warning: false
@@ -56,7 +57,7 @@ In summary, we are excited about the potential of our weather forecast data proj
 
 > ## Analysis Plan
 
-### **Question 1: Spatial Distribution of Temperature Forecasting Errors** {style="color: blue"}
+### **Question 1: Spatial Distribution of Temperature Forecasting Errors** {style="color: black"}
 
 How does the error in temperature prediction vary across the United States? and can we identify clusters of cities with similar error patterns?
 
@@ -81,7 +82,7 @@ This question is essential since errors in weather forecasting are the main reas
 
 Finally, we will implement a dark mode design to achieve a modern and eye-catching aesthetic, and we will utilize the color theory to show the results. Also, in the data visualization we are creating as a heatmap, we will attempt to make it possible for users to be able to zoom in and out for a detailed exploration of specific regions. We hope that this visualization will not only provide answers to the scientific questions but also engage users with modern and interactive design elements, enhancing their understanding of the data and its implications.
 
-### **Question 2: Geographic Seasonality in Temperature Forecasting Errors** {style="color: blue"}
+### **Question 2: Geographic Seasonality in Temperature Forecasting Errors** {style="color: black"}
 
 How do temperature forecasting errors vary across the U.S. during different seasons, and can we visualize this on a geographic heatmap?
 
