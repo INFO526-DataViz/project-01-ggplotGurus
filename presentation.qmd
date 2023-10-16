@@ -47,9 +47,8 @@ knitr::opts_chunk$set(
   )
 ```
 
-```{r}
-#| label: load-data
-#| include: false
+```{r include=FALSE}
+
 # Load data here
 
 weather_forecasts <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-12-20/weather_forecasts.csv', show_col_types = FALSE)
@@ -80,10 +79,14 @@ The dataset Weather_forecast_Accuracy includes 16 months of forecasts and observ
 
 3.  `outlook_meanings`:
 
+    -   Forecast_outlook, meaning
+    
+
 ## Question 1: How does the error in temperature prediction vary across the United States? Can we identify clusters of cities with similar error patterns? {style="text-align: center"}
 ---
 
 #### Visualize the mean temperature prediction error by city {style="text-align: center"}
+
 ```{r}
 # Calculate temperature prediction error
 weather_forecasts <- weather_forecasts %>%
@@ -279,15 +282,4 @@ fall_data <- error_by_city_season %>% filter(season == "Fall")
 plot_seasonal_map(fall_data, "Fall")
 ```
 
-## Trend of Temperature Forecasting Errors over the years
 
-```{r q2-viz1-plot2}
-
-weather_forecasts %>%
-  group_by(date) %>%
-  summarise(mean_error = mean(temp_error, na.rm = TRUE)) %>%
-  ggplot(aes(x=date, y=mean_error)) + 
-  geom_line() + 
-  labs(title="Trend of Temperature Forecasting Errors", 
-       x="Date", y="Mean Error")
-```
