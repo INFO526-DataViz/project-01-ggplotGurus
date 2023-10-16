@@ -3,19 +3,20 @@ title: "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy a
 subtitle: "INFO 526 - Fall 2023 - Project 1"
 author: "GGplot gurus- Swetha, Shalon, Deema, Kiwoon, Harsh"
 title-slide-attributes:
-  data-background-image: images/US map.jpeg
-  data-background-size: cover
-  data-background-opacity: "0.5"
+  data-background-image: images/wf2.jpeg
+  data-background-size: stretch
+  data-background-opacity: "0.4"
   data-slide-number: none
-  data-background-position: center
-  
 format:
   revealjs:
     theme:  ['data/customtheming.scss']
+    transition: convex
+    background-transition: concave
   
 editor: visual
 execute:
   echo: false
+  warning: false
 ---
 
 ```{r load packages}
@@ -67,13 +68,13 @@ outlook_meanings <- readr::read_csv('https://raw.githubusercontent.com/rfordatas
 
 &nbsp;
 
-![](images/forecast-reliability.jpg){style="align: center" fig-align="center" width="457"}
+![](images/Slide2.jpg){fig-align="center" width="437"}
 
 ## Dataset {style="text-align: center"}
 
 The dataset Weather_forecast_Accuracy includes 16 months of forecasts and observations from 167 cities. Weather_forecast_Accuracy is divided into three dimensions, `weather_forecasts`, `cities`, and `outlook_meanings`.
 
-## Question 1: How does the error in temperature prediction vary across the United States? And can we identify clusters of cities with similar error patterns? {style="text-align: center"}
+## Question 1: How does the error in temperature prediction vary across the United States?  Can we identify clusters of cities with similar error patterns? {style="text-align: center"}
 
 ## Question 2: Geographic Seasonality in Temperature Forecasting Errors {style="text-align: center"}
 
