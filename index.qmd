@@ -34,9 +34,13 @@ outlook_meanings <- readr::read_csv('https://raw.githubusercontent.com/rfordatas
 
 ## Abstract
 
+------------------------------------------------------------------------
+
 In this project, our team is looking at a Weather Forecast Accuracy dataset provided by the USA National Weather Service. Our aim is to learn which areas of the U.S. struggle with weather prediction and the possible reasons why. Specifically, we focussed to answer to key questions: First, where in the U.S are the predictions most and least accurate? Second, are there certain times of the year when these predictions tend to be more or less accurate? We will also include in-depth discussions of our approach and method and include why our analysis was performed the way it was. By using heatmaps and other visuals, we hope to make our findings easy to understand. Our project aims to give insights on temperature predictions and help people understand where.\
 
 ## Introduction
+
+------------------------------------------------------------------------
 
 Weather forecasts are a big deal. Every day, people and businesses depend on them to make all kinds of decisions. Think about it: Farmers use forecasts to decide when to plant crops. Airlines and trucking companies need them to plan routes. Even ordinary folks use them to plan picnics or decide on what to wear. Getting these predictions right can make a big difference.
 
@@ -52,25 +56,11 @@ With all this data in hand, our project wants to dig into where and when tempera
 
 ### Introduction
 
-Weather Forecast Accuracy is a significant domain of study, given the dependency of various industries, transportation, and even day-to-day activities on weather predictions. Precise forecasting can significantly impact logistics, energy sector decisions, agriculture, and more. This project's objective is to understand the accuracy of temperature forecasting across the U.S., examining which areas face challenges in weather prediction and delving into potential reasons for discrepancies. The data comprises 16 months of forecasts and observations from 167 cities, which serves as the foundation for this study.
+In the first question, we investigated the errors in weather forecasts and their relationship to geographic clusters in the U.S. Since the advent of weather forecasting, errors in weather forecasts have always been a concern of ours, so we wanted to see what factors contribute to these errors. We thought that regional differences might be a key reason of weather forecast errors, so we analyzed the differences in forecasts across regions to see if they were significantly different for each clusters of regions.
 
 ### Approach
 
-To assess the error in temperature prediction across the U.S. and identify clusters of cities with similar error patterns, we will utilize advanced geospatial data visualization techniques. Our methodology will involve the creation of a choropleth map of the United States, presenting a clear visual representation of temperature forecasting errors for cities.
-
-1.  **Choropleth Map:** This map will be generated using the following variables:
-    -   Latitude
-    -   Longitude
-    -   Cities
-    -   Temperature forecasting errors
-2.  **Temperature Forecasting Errors Calculation:** The errors will be determined using:
-    -   Observed Temperature (Degrees Fahrenheit)
-    -   Forecasted Temperature (Degrees Fahrenheit)
-3.  **Clustering Cities Based on Regional Error Patterns:** To further dissect the data:
-    -   Cities will be categorized by state.
-    -   Regional averages of errors will be computed to identify patterns.
-
-Incorporating a dark mode design will provide a modern, visually appealing look to our visualizations.
+To assess the error in temperature prediction across the U.S. and identify clusters of cities with similar error patterns, we utilized advanced geospatial data visualization techniques. Our methodology involved the creation of a choropleth map using the variables `lat` for latitude, `lon` for longitude and `city` in the dataset, presenting a clear visual representation of `temperature_forecasting_errors`(Degrees Fahrenheit) for cities. After categorizing the cities into states, we visualized the average gap per state so that we could identify patterns, making local inferences about the question.
 
 ### Analysis
 
@@ -97,6 +87,20 @@ In summary, while the U.S. National Weather Service provides extensive forecasti
 In this data visualization project, we look into the "weather_forecasts" dataset from TidyTuesday. This dataset provides us with information about how accurate temperature forecasts are in different cities across the United States. It contains data on both observed temperatures, the temperatures that were predicted, the locations of these cities, and the time of year when these forecasts were made. Our primary aim is to examine how the average errors in temperature forecasts change depending on the season and location. This analysis can shed light on whether temperature forecasts are more accurate at certain times of the year and in specific geographic areas.
 
 ### Approach 
+
+To determine whether the certain regions in the U.S. exhibit seasonal variations in temperature forecast errors we used heatmaps overlaid on a map of the U.S. Our chosen visualization method is a series of heatmaps, each corresponding to a specific season, overlaid on a map of the U.S. We also created a time series plot to analyse the mean temperature error against time, offering insights into periods of increased forecasting challenges
+
+1.  **Seasonal Classification**: We first classified each date into its respective season, i.e., Winter, Spring, Summer, or Fall, based on the month. This helped us group data seasonally and observe trends specific to different times of the year.
+
+2.  **Calculating Forecast Errors**: We derived the temperature error by subtracting the forecasted temperature from the observed temperature. This gives us an idea of how accurate the forecast was, with positive values indicating the actual temperature was warmer than forecasted and negative values indicating it was cooler.
+
+3.  **Aggregating Errors**: To obtain a comprehensive view, we grouped our data by city, state, and season. We then calculated the mean temperature error for each group, giving us an average measure of how off the forecasts were for each city during each season.
+
+4.  **Data Joining**: We merged this aggregated error data with geographic information of the cities, which provides us with the latitude and longitude needed for mapping.
+
+5.  **Mapping Errors**: We then used the `usmap` and `sf` packages to create a heatmap for each season. The geographical heatmap helps visualize regions with the highest temperature forecasting errors. Darker shades indicate higher errors, making it easy to spot regions that frequently get their forecasts wrong.
+
+6.  **Visualization**: Four separate heatmaps were created, one for each season - Winter, Spring, Summer, and Fall. These visualizations allow for easy comparison of forecasting accuracy across different parts of the U.S. during different times of the year.Apart from the seasonal heatmaps we also included a time-series analysis. We plotted the trend of temperature forecasting errors over the entire time frame available in the dataset. This provides insights into whether there's a general improvement or degradation in forecasting accuracy over time, or if there are any anomalies or notable events impacting forecasting accuracy.
 
 ### Analysis
 
@@ -137,6 +141,8 @@ plot_seasonal_map <- function(data, season_name) {
 
 ```
 
+##### Temperature forecasting errors - Seasonally
+
 ```{r q2-viz1-plot}
 
 # For Winter
@@ -155,6 +161,36 @@ plot_seasonal_map(summer_data, "Summer")
 fall_data <- error_by_city_season %>% filter(season == "Fall")
 plot_seasonal_map(fall_data, "Fall")
 
+```
+
+```{r q2-viz1-error}
+
+
+# Cities with highest and lowest average errors in each season
+error_by_city_season %>% 
+  group_by(season) %>%
+  top_n(1, mean_temp_error) %>%
+  select(season, city, mean_temp_error)
+
+error_by_city_season %>% 
+  group_by(season) %>%
+  top_n(-1, mean_temp_error) %>%
+  select(season, city, mean_temp_error)
+
+
+```
+
+##### Trend of Temperacture Forecasting Errors over the years
+
+```{r q2-viz1-plot2}
+
+weather_forecasts %>%
+  group_by(date) %>%
+  summarise(mean_error = mean(temp_error, na.rm = TRUE)) %>%
+  ggplot(aes(x=date, y=mean_error)) + 
+  geom_line() + 
+  labs(title="Trend of Temperature Forecasting Errors", 
+       x="Date", y="Mean Error")
 ```
 
 ### Discussion
