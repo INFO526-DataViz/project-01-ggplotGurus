@@ -1,4 +1,6 @@
--   **[Dataset]**: The dataset comprises weather forecast data gathered over 16 months from 167 cities across the United States. It's aimed at analyzing the accuracy of high and low-temperature forecasts and understanding the regional variances in forecast accuracy. The data has been sourced from the USA National Weather Service and processed by the team at the Saint Louis University Department of Mathematics and Statistics.
+# Data
+
+-   The dataset comprises weather forecast data gathered over 16 months from 167 cities across the United States. It's aimed at analyzing the accuracy of high and low-temperature forecasts and understanding the regional variances in forecast accuracy. The data has been sourced from the USA National Weather Service and processed by the team at the Saint Louis University Department of Mathematics and Statistics.
 
 # Codebook for Weather Forecast Accuracy Dataset
 
