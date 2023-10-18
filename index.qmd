@@ -35,13 +35,9 @@ In this project, our team is looking at a Weather Forecast Accuracy dataset prov
 
 ## Introduction
 
-Weather forecasts are a big deal. Every day, people and businesses depend on them to make all kinds of decisions. Think about it: Farmers use forecasts to decide when to plant crops. Airlines and trucking companies need them to plan routes. Even ordinary folks use them to plan picnics or decide on what to wear. Getting these predictions right can make a big difference.
+Weather forecasts are a big deal. Every day, people and businesses depend on them to make all kinds of decisions. Think about it: Farmers use forecasts to decide when to plant crops. Airlines and trucking companies need them to plan routes. Even ordinary folks use them to plan picnics or decide on what to wear. Getting these predictions right can make a big difference. So, how often are these forecasts on the mark? That's what we wanted to figure out.
 
-So, how often are these forecasts on the mark? That's what we wanted to figure out. We picked a dataset called Weather Forecast Accuracy from the USA National Weather Service. This dataset gives us a peek into the weather predictions and what really happened over 16 months in 167 U.S. cities.
-
-The dataset is split into three parts. The first part, weather_forecasts, is a big list with over 650,000 observations, giving us details like which city and state the forecast was for, what the expected and actual temperatures were, and when the prediction was made. The second part, cities, provides details about 236 cities, like where they are located. And the last part, outlook_meanings, helps us understand more about the types of forecasts.
-
-With all this data in hand, our project wants to dig into where and when temperature forecasts tend to be most accurate or where they might miss the mark. By the end, we hope to give everyone a clearer idea of how much they can trust the weather forecasts they hear every day.
+We picked a dataset called Weather Forecast Accuracy from the USA National Weather Service. This dataset gives us a peek into the weather predictions and what really happened over 16 months in 167 U.S. cities. The dataset is split into three parts. The first part, weather_forecasts, is a big list with over 650,000 observations, giving us details like which city and state the forecast was for, what the expected and actual temperatures were, and when the prediction was made. The second part, cities, provides details about 236 cities, like where they are located. And the last part, outlook_meanings, helps us understand more about the types of forecasts.With all this data in hand, our project wants to dig into where and when temperature forecasts tend to be most accurate or where they might miss the mark. By the end, we hope to give everyone a clearer idea of how much they can trust the weather forecasts they hear every day.
 
 ## Question 1: How does the error in temperature prediction vary across the United States? And can we identify? What are the cities with the highest error rates? Are there any regional insights that can be inferred from this dataset?
 
@@ -55,7 +51,7 @@ To assess the error in temperature prediction across the U.S. and identify clust
 
 And we methodology involved the creation of a choropleth map using the variables `lat` for latitude, `lon` for longitude and `city` in the dataset, presenting a clear visual representation of `temperature_forecasting_errors`(Degrees Fahrenheit) for cities. After categorizing the cities into states, we visualized the average gap per state so that we could identify patterns, making local inferences about the question.
 
-### Analysis 
+### Analysis
 
 <br>
 
@@ -242,15 +238,43 @@ error_by_city_season <- weather_forecasts %>%
 # Convert the data to sf object
 sf_error_by_city_season <- st_as_sf(error_by_city_season, coords = c("lon", "lat"), crs = 4326)
 
+library(maps)
+library(usmap)
+library(ggplot2)
+library(dplyr)
+library(plotly)
+library(maps)
+
+# Convert 'full' in state_data to lowercase
+#state_data$full <- tolower(state_data$full)
+
+# Make sure state_data has unique rows for each state
+#state_data <- distinct(state_data, full, abbr, .keep_all = TRUE)
+
+
+# Remove duplicated rows in data based on state and mean_temp_error
+data <- distinct(data, state, mean_temp_error, .keep_all = TRUE)
+# Modified plotting function
 plot_seasonal_map <- function(data, season_name) {
-  plot_usmap(data = data, values = "mean_temp_error", lines = "black") +
-    scale_fill_gradient2(low = "blue", high = "red", midpoint = 0, 
+  p <- plot_usmap(data = data, values = "mean_temp_error", lines = "black") +
+    scale_fill_gradient2(low = "blue", high = "red", midpoint = 0,
                          name = "Mean Temp Error (°F)", label = scales::comma) +
     labs(title = paste("Geographic Seasonality in Temperature Forecasting Errors -", season_name),
          subtitle = "Mean temperature forecasting errors across U.S. states") +
     theme(legend.position = "right")
+  # Get the area of each state to scale the text size
+  states_area <- data.frame(state = tolower(state.name), area = state.area)
+  # Normalize the area values to a scale of 1 to 5 for text size
+  states_area$size <- scales::rescale(states_area$area, to = c(1, 5))
+  # Merge with state_data to get coordinates and abbreviations
+  annotations <- merge(state_data, states_area, by.x = "full", by.y = "state")
+  # Adding state abbreviations on top of the states with scaled size
+  p <- p + geom_text(data = annotations, aes(x = x, y = y, label = abbr, size = size), color = "black", inherit.aes = FALSE) +
+    scale_size_identity()
+  # Modify this line for displaying state name and mean_temp_error on hover
+  interactive_map <- ggplotly(p, tooltip = c("full", "mean_temp_error"))
+  return(interactive_map)
 }
-
 
 
 ```
@@ -259,7 +283,8 @@ plot_seasonal_map <- function(data, season_name) {
 
 ```{r q2-viz1-plot}
 
-# For Winter
+
+# Test for Winter
 winter_data <- error_by_city_season %>% filter(season == "Winter")
 plot_seasonal_map(winter_data, "Winter")
 
