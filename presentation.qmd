@@ -1,25 +1,59 @@
 ---
-title: "Seasonal & Temporal Trends: Exploring the weather forecasting accuracy across the U.S."
-subtitle: "INFO 526 - Fall 2023 - Project 1"
-author: "GGplot gurus- Swetha, Shalon, Deema, Kiwoon, Harsh"
-title-slide-attributes:
-  data-background-image: images/wf2.jpeg
-  data-background-size: stretch
-  data-background-opacity: "0.4"
-  data-slide-number: none
+title: "HW 03"
+author: "Harshit Mehra"
 format:
-  revealjs:
-    theme:  ['data/customtheming.scss']
-    transition: convex
-    background-transition: concave
-  
-editor: visual
-execute:
-  echo: false
-  warning: false
+  html:
+    embed-resources: true
+toc: true
 ---
 
-```{r load packages}
+## 1 - Thank you.
+
+```{r}
+#| label: label-me-1
+
+
+
+# Load necessary packages
+library(ggplot2)
+library(png)
+
+# Define custom fonts
+font_add_google("Dancing Script", regular = "400")
+font_add_google("Montserrat", regular = "400")
+
+# Set the fonts to use in the plot
+showtext_auto()
+
+# Load the background image
+background_image <- readPNG("images/background.png")
+
+# Create a plot with a dark background
+thank_you_plot <- ggplot() +
+  theme_void() +
+  annotation_raster(background_image, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, interpolate = TRUE)
+
+# Add a centered "THANK YOU" message with custom fonts and colors
+thank_you_plot +
+  annotate("text", x = 0.5, y = 0.5, label = "THANK YOU", size = 10, color = "#FFAE42", family = "Dancing Script", fontface = "bold")
+
+
+
+
+```
+
+
+
+
+
+
+## 2 - A second chance.
+
+```{r}
+#| label: label-me-2
+
+
+
 
 
 if (!require("pacman"))
@@ -27,13 +61,7 @@ if (!require("pacman"))
 pacman::p_load(tidyverse, tidytuesdayR,ggridges,plotly,
                patchwork, lubridate, ggmap, sf, usmap, 
                viridis, ggthemes, maps
-               )
-
-```
-
-```{r}
-#| label: setup
-#| include: false
+)
 
 # Plot theme
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
@@ -44,10 +72,7 @@ knitr::opts_chunk$set(
   dpi = 300, 
   fig.width = 6, 
   fig.asp = 0.618 
-  )
-```
-
-```{r include=FALSE}
+)
 
 # Load data here
 
@@ -55,39 +80,19 @@ weather_forecasts <- readr::read_csv('https://raw.githubusercontent.com/rfordata
 cities <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-12-20/cities.csv', show_col_types = FALSE)
 outlook_meanings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-12-20/outlook_meanings.csv', show_col_types = FALSE)
 
-```
+
 
 ## **How Reliable Are Weather Forecasts?** {style="text-align: center; color: green"}
 
- 
 
- 
 
-![](images/Slide2.jpg){fig-align="center" width="437"}
-
-## Dataset and key variables {style="text-align: center"}
-
-The dataset Weather_forecast_Accuracy includes 16 months of forecasts and observations from 167 cities.
-
-1.  `weather_forecasts:`
-
-    -   Date, City and State, Observed Temp and Forecast Temp
-
-2.  `cities:`
-
-    -   longitude, latitude, Cities, Temperature forecasting errors
-
-3.  `outlook_meanings`:
-
-    -   Forecast_outlook, meaning
-    
 
 ## Question 1: How does the error in temperature prediction vary across the United States? Can we identify clusters of cities with similar error patterns? {style="text-align: center"}
----
 
-#### Visualize the mean temperature prediction error by city {style="text-align: center"}
+  
+  #### Visualize the mean temperature prediction error by city {style="text-align: center"}
+  
 
-```{r}
 # Calculate temperature prediction error
 weather_forecasts <- weather_forecasts %>%
   mutate(temp_error = observed_temp - forecast_temp)
@@ -149,22 +154,46 @@ ggplot(city_errors, aes(x = as.factor(city_index), y = mean_temp_error)) +
   labs(title = "Mean Temperature Prediction \nError by City")
 
 
-```
 
-------------------------------------------------------------------------
 
-#### Identifyng error per cluster on a map {style="text-align: center"}
+#    NEW CODE :
 
-```{r, warning=FALSE}
-outlook_translations <- tribble(
-  ~forecast_outlook, ~meaning,
-  "BLGSNO", "Blowing Snow",
-  "BLZZRD", "Blizzard",
-  "DRZL", "Drizzle",
-  # ... and so on for the rest of the translations
-  "VRYHOT", "Very Hot",
-  "VRYCLD", "Very Cold"
-)
+
+library(ggplot2)
+
+# Sorting the cities by mean temperature prediction error
+city_errors <- city_errors[order(city_errors$mean_temp_error), ]
+
+# Choose the top N cities with the highest mean temperature prediction errors
+top_n_cities <- 35  
+
+# Filter the data to include only the top N cities
+filtered_data <- head(city_errors, n = top_n_cities)
+
+# Create a bar graph
+barplot <- ggplot(filtered_data, aes(x = city, y = mean_temp_error)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  geom_text(aes(label = round(mean_temp_error, 2), vjust = ifelse(mean_temp_error < 0, 1, -1)), color = "black", size = 4) +
+  labs(title = "Mean Temperature Prediction Error by City (Top 10 Cities)", x = "City", y = "Mean Temp Error") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(size = 14, hjust = 0.5))
+
+print(barplot)
+
+
+# In the code provided, we I am creating a normal bar graph instead of circular graph to make it more manageable to show the mean temperature prediction errors for a list of cities.
+# I am selecting and displaying only the top N cities with the highest mean temperature prediction errors. 
+# This helps focus on the most important data points and makes the graph easier to understand.
+
+
+
+
+
+
+#------------------------------------------------------------------------
+  
+
+
 
 # Create meaningful outlooks and store them in a named vector for fast lookup
 lookup <- deframe(outlook_translations)
@@ -187,6 +216,7 @@ city_errors_map <- left_join(city_errors, cities, by = c("city", "state")) %>%
   filter(lat > 24 & lat < 50 & lon > -125 & lon < -66)
 
 # Create a map with adjusted aesthetics
+
 ggplot(data = city_errors_map) +
   geom_point(aes(x = lon, y = lat, color = mean_temp_error), size = 2) +
   scale_color_viridis_c(name = "Mean Temp\nError (°F)", option = "C") +
@@ -202,21 +232,26 @@ ggplot(data = city_errors_map) +
     axis.title = element_text(color = "white"), # White axis titles
     legend.background = element_rect(fill = "black"), # Black legend background
     legend.text = element_text(color = "white"), # White legend text
-    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.grid.major = element_line(color = "#565656", size = 0.2), # Add major grid lines
     panel.grid.minor = element_blank()  # Remove minor grid lines
   ) +
-  scale_x_continuous(limits = c(-125, -66)) +
-  scale_y_continuous(limits = c(24, 50)) +
+  scale_x_continuous(limits = c(-125, -66), breaks = seq(-125, -66, by = 5)) +  # Add more X-axis points
+  scale_y_continuous(limits = c(24, 50), breaks = seq(24, 50, by = 5)) +   # Add more Y-axis points
   geom_polygon(data = map_data("state"), aes(x = long, y = lat, group = group), fill = NA, color = "white") + # Adding state boundaries
   geom_polygon(data = map_data("usa"), aes(x = long, y = lat, group = group), fill = NA, color = "white") # Adding US borders
 
-```
+
+# I added Grids here to make the plot more human readable. 
+
+
+
 
 ## Question 2: Geographic Seasonality in Temperature Forecasting Errors {style="text-align: center"}
 
 #### Do seasons impact Weather forecasting ?
 
-```{r}
+install.packages("sf")
+library(sf)
 
 
 # Data Preparation
@@ -249,37 +284,263 @@ plot_seasonal_map <- function(data, season_name) {
     theme(legend.position = "right")
 }
 
-```
+
 
 ## Winter
 
-```{r winter plot}
-
-
-# For Winter
 winter_data <- error_by_city_season %>% filter(season == "Winter")
 plot_seasonal_map(winter_data, "Winter")
-```
 
-## Spring
+## Spring 
 
-```{r spring plot}
 spring_data <- error_by_city_season %>% filter(season == "Spring")
 plot_seasonal_map(spring_data, "Spring")
-```
+
 
 ## Summer
 
-```{r summer plot}
 summer_data <- error_by_city_season %>% filter(season == "Summer")
 plot_seasonal_map(summer_data, "Summer")
-```
 
 ## Fall
 
-```{r fall plot}
 fall_data <- error_by_city_season %>% filter(season == "Fall")
 plot_seasonal_map(fall_data, "Fall")
 ```
 
 
+## 3 - Median housing prices in the US.
+```{r}
+
+# Loading the dataset : 
+
+library(readr)
+library(dplyr)
+library(lubridate)
+library(glue)
+
+
+median_housing <- read_csv("data/median-housing.csv")
+recessions <- read_csv("data/recessions.csv")
+
+# Renaming the column in median_housing : 
+
+median_housing <- median_housing |>
+  rename(
+    date = DATE,
+    price = MSPUS
+  )
+
+
+#  Plot - 1
+
+library(ggplot2)
+ggplot(data = median_housing, aes(x = date, y = price)) + 
+  geom_line(color = "#4169E1", size = 1) + 
+  scale_x_date(date_breaks = "5 years", date_labels = "%Y") +
+  scale_y_continuous(
+    breaks = seq(0, 400000, by = 40000),
+    labels = scales::comma,
+    limits = c(0, 400000)
+  ) + 
+  labs(
+    x = NULL,
+    y = "Dollars",
+    title = "Median sales price of houses sold in the United States",
+    subtitle = "Not seasonally adjusted",
+    caption = "Sources: Census; HUD"
+  ) + theme_minimal() + 
+  theme(
+    plot.title.position = "plot",
+    plot.caption.position = "plot",
+    plot.title = element_text(size = 14),
+    plot.subtitle = element_text(size = 12),
+    plot.caption = element_text(size = 10),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.title.x = element_text(size = 10),
+    axis.title.y = element_text(size = 10)
+  )
+
+# Filtering True Recession values :
+
+recessions <- recessions |>
+  mutate(
+    Recession = ifelse(
+      Peak >= min(median_housing$date) & Trough <= max(median_housing$date), TRUE, FALSE
+    )
+  )
+
+recessions_true <- recessions |>
+  filter(Recession == TRUE)
+
+
+# Plot - 2
+
+ggplot() + 
+  geom_rect(
+    data = recessions_true, 
+    mapping = aes(xmin = Peak, xmax = Trough, ymin = -Inf, ymax = Inf), 
+    fill = "#E0E0E0", size = 0.2
+  ) +
+  geom_line(data = median_housing, aes(x = date, y = price), color = "#4169E1", size = 1) + 
+  scale_x_date(date_breaks = "5 years", date_labels = "%Y") +
+  scale_y_continuous(
+    breaks = seq(0, 400000, by = 40000),
+    labels = scales::comma,
+    limits = c(0, 400000)
+  ) + 
+  labs(
+    x = NULL,
+    y = "Dollars",
+    title = "Median sales price of houses sold in the United States",
+    subtitle = "Not seasonally adjusted",
+    caption = "Shaded areas indicate U.S. recessions\n Sources: Census; HUD"
+  ) + theme_minimal() + 
+  theme(
+    plot.title.position = "plot",
+    plot.caption.position = "plot",
+    plot.title = element_text(size = 14),
+    plot.subtitle = element_text(size = 12),
+    plot.caption = element_text(size = 10),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.title.x = element_text(size = 10),
+    axis.title.y = element_text(size = 10)
+  )
+
+# Creating a subset of median_housing and add Quarters :
+
+subset_median_housing <- median_housing |>
+  filter(date >= as.Date("2019-01-01") & date <= as.Date("2020-12-31")) |>
+  mutate(year = year(date)) |>
+  mutate(
+    Quater = case_when(
+      month(date) %in% 1:3 ~ "Q1",
+      month(date) %in% 4:6 ~ "Q2",
+      month(date) %in% 7:9 ~ "Q3",
+      TRUE ~ "Q4"
+    )
+  ) |>
+  mutate(
+    quater_year = glue("{Quater}|{year}")
+  ) |>
+  mutate(
+    quater_year = factor(quater_year, levels = unique(quater_year))
+  )
+
+
+# Plot - 3
+
+ggplot(data = subset_median_housing, aes(x = quater_year, y = price, group = 1)) + 
+  geom_line(color = "#4169E1", size = 1) + 
+  geom_point(color = "#4169E1", fill = "#FFFFFF", shape = 21, size = 2, stroke = 1)  +
+  scale_y_continuous(
+    breaks = seq(300000, 360000, by = 20000), 
+    labels = scales::comma
+  ) + 
+  scale_x_discrete(labels = c("Q1", "Q2", "Q3", "Q4", "Q1", "Q2", "Q3", "Q4")) +
+  labs(
+    x = NULL,
+    y = "Dollars",
+    title = "Median sales price of houses sold in the United States",
+    subtitle = "Not seasonally adjusted"
+  ) + theme_minimal() + 
+  theme(
+    plot.margin = unit(c(1, 1, 5, 1), "lines"),
+    plot.title.position = "plot",
+    plot.caption.position = "plot",
+    plot.title = element_text(size = 14),
+    plot.subtitle = element_text(size = 12),
+    plot.caption = element_text(size = 10),
+    axis.title.x = element_text(size = 10),
+    axis.title.y = element_text(size = 10
+    )) + 
+  annotate(geom = "text", x = c("Q3|2019", "Q3|2020"), y = 295000, 
+           label = unique(subset_median_housing$year), size = 3) + 
+  coord_cartesian(ylim = c(300000, 360000), expand = FALSE, clip = "off") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+
+
+```
+
+
+
+## 4 - That’s what our guest said.
+```{r}
+
+
+library(distributional)
+library(openintro)
+library(ggdist)
+
+data <- openintro::loans_full_schema 
+
+model <- lm(interest_rate ~ loan_purpose, data = loans_full_schema)
+
+# Print regression output
+tidy_output <- broom::tidy(model)
+
+# Create half-eye plots 
+half_eye_data <- tidy_output
+
+# Set the theme
+theme_set(theme_ggdist())
+
+# Create the half-eye plot
+ggplot(half_eye_data, aes(y = term, xdist = dist_normal(estimate, std.error))) + 
+  stat_halfeye() +
+  labs(title = "Half-Eye Plot of Coefficients",
+       x = "Estimate",
+       y = "Coefficients")
+
+
+```
+
+
+
+## 5 - Du Bois challenge.
+```{r}
+
+
+library(ggplot2)
+library(png)
+library(jpeg)
+library(grid)
+
+# Reading data :
+income_data <- read.csv("data/income.csv")
+
+# Converting the "Class" column to a factor :
+income_data$Class <- factor(income_data$Class)
+
+# Setting factor levels based on the unique values in the "Class" column :
+income_data$Class <- factor(income_data$Class, levels = unique(income_data$Class))
+
+# Loading background image :
+background_image <- readJPEG("images/parchment_png.jpg")
+
+# Creating the plot :
+ggplot(data = income_data, aes(x = Class, y = Rent)) +
+  annotation_custom(rasterGrob(background_image, width = unit(1, "npc"), height = unit(1, "npc")), xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf) +
+  geom_bar(stat = "identity", fill = "#045a8d") +
+  scale_y_continuous(labels = scales::dollar_format(scale = 0.001)) +
+  labs(
+    x = "Income Range",
+    y = "Rent (in Thousands of Dollars)",
+    subtitle = "Family Budgets in Atlanta, Georgia"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.subtitle = element_text(size = 16, hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.margin = unit(rep(2, 4), "lines")
+  ) +
+  coord_cartesian(clip = "off")
+
+
+
+```
